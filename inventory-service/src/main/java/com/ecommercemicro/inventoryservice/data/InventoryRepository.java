@@ -1,15 +1,12 @@
 package com.ecommercemicro.inventoryservice.data;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
-    boolean existsBySkuCode(String skuCode);
+    Optional<Inventory> findBySkuCode(String skuCode);
 
     List<Inventory> findBySkuCodeIn(List<String> skuCodes);
-
-    @Query(value = "Select i.quantity From Inventory i Where i.skuCode =:skuCode ")
-    Integer stockCount(String skuCode);
 }

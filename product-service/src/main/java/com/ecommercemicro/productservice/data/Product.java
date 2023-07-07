@@ -20,6 +20,7 @@ public class Product {
     private String productName;
     private String description;
     private BigDecimal price;
+    private String skuCode;
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;

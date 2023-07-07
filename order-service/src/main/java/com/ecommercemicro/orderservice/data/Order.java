@@ -19,6 +19,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String orderNo;
+    private String status;
+    private String address;
+    private Long userId;
     @OneToMany(mappedBy = "order")
     private List<OrderLineItems> orderLineItemsList;
 }
