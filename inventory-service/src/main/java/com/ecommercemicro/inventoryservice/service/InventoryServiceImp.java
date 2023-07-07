@@ -55,6 +55,6 @@ public class InventoryServiceImp implements InventoryService {
             else
                 log.warn("Sku code {} not found in inventory service!", soldItems.getSkuCode());
         }
-        return 5;
+        return 1;
     }
 }

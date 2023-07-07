@@ -123,15 +123,11 @@ public class ProductServiceImpl implements ProductService{
         Span inventortyServiceCall = tracer.nextSpan().name("InventoryServiceCall");
 
         try(Tracer.SpanInScope spanInScope = tracer.withSpan(inventortyServiceCall.start())){
-            InventoryResponse[] inventoryResponses = webClientBuilder.build().get()
+            return webClientBuilder.build().get()
                     .uri(uri, uriBuilder -> uriBuilder.queryParam("skuCodes", skuCodes).build())
                     .retrieve()
                     .bodyToMono(InventoryResponse[].class)
                     .block();
-
-            InventoryResponse[] inventoryResponses1 = inventoryResponses;
-            return inventoryResponses1;
-
         }finally {
             inventortyServiceCall.end();
         }

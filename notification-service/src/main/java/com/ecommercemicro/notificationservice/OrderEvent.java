@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderPlacedEvent {
+public class OrderEvent {
     private String orderNumber;
+    private String mailAddress;
+    private String name;
+    private String lastName;
+    private String status;
 }

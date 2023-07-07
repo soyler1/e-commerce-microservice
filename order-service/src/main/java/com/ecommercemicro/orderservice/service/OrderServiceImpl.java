@@ -72,7 +72,6 @@ public class OrderServiceImpl implements OrderService {
         try(Tracer.SpanInScope spanInScope = tracer.withSpan(inventoryServiceLookup.start())){
             //ürününleri stoktan düşmek için envanter servisini çağırıyoruz.
             Integer result = inventoryClient.itemsSold(soldItemsRequest);
-            log.warn(result+"");
         } finally {
             inventoryServiceLookup.end();
         }
