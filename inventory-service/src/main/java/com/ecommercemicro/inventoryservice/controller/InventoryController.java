@@ -1,6 +1,7 @@
 package com.ecommercemicro.inventoryservice.controller;
 
 import com.ecommercemicro.inventoryservice.data.dto.InventoryResponse;
+import com.ecommercemicro.inventoryservice.dto.SoldItemsRequest;
 import com.ecommercemicro.inventoryservice.service.InventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,15 @@ public class InventoryController {
     @ResponseStatus(HttpStatus.OK)
     public List<InventoryResponse> stockCount(@RequestParam List<String> skuCodes) {
         return inventoryService.stockCount(skuCodes);
+    }
+
+    @GetMapping("/{skuCode}")
+    public Integer stockCount(@PathVariable("skuCode") String skuCode){
+        return inventoryService.stockCount(skuCode);
+    }
+
+    @PostMapping("/itemsSold")
+    public Integer itemsSold(@RequestBody SoldItemsRequest soldItemsRequest){
+        return inventoryService.soldItems(soldItemsRequest);
     }
 }
