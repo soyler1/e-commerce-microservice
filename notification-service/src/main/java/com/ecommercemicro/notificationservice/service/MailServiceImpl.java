@@ -1,22 +1,27 @@
-package com.ecommercemicro.notificationservice;
+package com.ecommercemicro.notificationservice.service;
 
+import com.ecommercemicro.notificationservice.OrderEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 
+@Service
 @RequiredArgsConstructor
-public class MailSender {
+public class MailServiceImpl implements MailService {
 
     private final JavaMailSender javaMailSender;
 
-    public void sendMailOnOrderEvent(OrderEvent orderEvent){
+
+    @Override
+    public void sendMail(OrderEvent orderEvent) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("ecommerceapp09@gmail.com");
         message.setTo(orderEvent.getMailAddress());
         message.setSubject("Siparişinizin Durumu Hakkında!");
-        String body ="Sayın " + orderEvent.getName() + " " + orderEvent.getLastName() + ",\n" +
+        message.setText("Sayın " + orderEvent.getName() + " " + orderEvent.getLastName() + ",\n" +
                 orderEvent.getOrderNumber() + " numaralı siparişinizin durumu güncellenmiştir.\n\n" +
-                "Siparişinizin güncel durumu: " + orderEvent.getStatus() + "\n\nBizi tercih ettiğiniz için teşekkür ederiz.";
+                "Siparişinizin güncel durumu: " + orderEvent.getStatus() + "\n\nBizi tercih ettiğiniz için teşekkür ederiz.");
 
         javaMailSender.send(message);
     }
